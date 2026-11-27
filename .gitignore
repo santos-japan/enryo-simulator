@@ -1,0 +1,5 @@
+# 公開するのは、本番のゲーム(index.html)と説明書きだけ。古い版・ほかの版・メモは上げない
+*
+!.gitignore
+!index.html
+!README.md
