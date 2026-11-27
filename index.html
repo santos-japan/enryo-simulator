@@ -474,6 +474,7 @@
   @media (min-width:701px) and (min-height:501px) and (max-height:1000px) {
     body.playing header { display:none; }
   }
+.stno{display:block;font-size:.72em;opacity:.75;letter-spacing:.08em;margin-bottom:2px}
 
   /* ===================== テーマ：ヘタウマ深夜アニメ ===================== */
   body.th-heta { font-family:"Comic Sans MS","Yu Gothic UI","Meiryo",sans-serif;
@@ -2137,11 +2138,11 @@ function chooseLang(lang){
 }
 // ステージを選ぶ画面。プロローグ(共通)のあとに出る。選んだら、そのステージの状況説明へ
 function showStageSelect(again){
-  const btns = STAGE_LIST.map(sd => (sd.id === "solo" && !soloOpen())
-    ? `<button class="sub stage-btn" disabled>🔒 ？？？<span class="soon">${L("結婚式の二次会をクリアすると…","Clear the wedding after-party…")}</span></button>`
+  const btns = STAGE_LIST.map((sd, n) => { const no = `<span class="stno">${L("ステージ"+(n+1), "Stage "+(n+1))}</span>`; return (sd.id === "solo" && !soloOpen())
+    ? `<button class="sub stage-btn" disabled>${no}🔒 ？？？<span class="soon">${L("結婚式の二次会をクリアすると…","Clear the wedding after-party…")}</span></button>`
     : STAGES[sd.id]
-    ? `<button class="big stage-btn" data-stage="${sd.id}">${sd.icon} ${line(sd.name)}</button>`
-    : `<button class="sub stage-btn" disabled>${sd.icon} ${line(sd.name)}<span class="soon">${L("準備中","Coming soon")}</span></button>`).join("");
+    ? `<button class="big stage-btn" data-stage="${sd.id}">${no}${sd.icon} ${line(sd.name)}</button>`
+    : `<button class="sub stage-btn" disabled>${no}${sd.icon} ${line(sd.name)}<span class="soon">${L("準備中","Coming soon")}</span></button>`; }).join("");
   showBox(`<h2 style="text-align:center">${L("ステージを選ぶ","Choose a stage")}</h2>
     <p style="text-align:center">${L("今夜は、どの戦場へ？","Which battlefield tonight?")}</p>
     <div class="stage-pick">${btns}</div>
